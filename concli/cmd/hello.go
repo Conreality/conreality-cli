@@ -4,9 +4,11 @@ package cmd
 
 import (
 	"fmt"
-	"os"
+	"time"
 
+	api "github.com/conreality/conreality.go/sdk/client"
 	"github.com/spf13/cobra"
+	"golang.org/x/net/context"
 )
 
 // HelloCmd describes and implements the `concli hello` command
@@ -16,8 +18,21 @@ var HelloCmd = &cobra.Command{
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("hello has not been implemented yet") // TODO
-		os.Exit(1)
+
+		client, err := api.Connect(master)
+		if err != nil {
+			panic(err)
+		}
+		defer client.Disconnect()
+
+		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+		defer cancel()
+
+		masterVersion, err := client.Hello(ctx)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf("version: %s\n", masterVersion)
 	},
 }
 

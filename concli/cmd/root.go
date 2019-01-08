@@ -10,6 +10,8 @@ import (
 	"github.com/spf13/viper"
 )
 
+const master = "localhost:50051"
+
 var configFile string
 var debug bool
 var verbose bool
