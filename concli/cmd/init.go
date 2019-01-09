@@ -12,7 +12,7 @@ import (
 // InitCmd describes and implements the `concli init` command
 var InitCmd = &cobra.Command{
 	Use:   "init",
-	Short: "Initialize configuration",
+	Short: "Initialize the configuration directory",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {

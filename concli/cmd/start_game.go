@@ -10,10 +10,10 @@ import (
 	"golang.org/x/net/context"
 )
 
-// LoginCmd describes and implements the `concli login` command
-var LoginCmd = &cobra.Command{
-	Use:   "login",
-	Short: "TODO",
+// StartGameCmd describes and implements the `concli start-game` command
+var StartGameCmd = &cobra.Command{
+	Use:   "start-game",
+	Short: "Start the game",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -27,7 +27,7 @@ var LoginCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
 		defer cancel()
 
-		_, err = client.Authenticate(ctx, "") // TODO
+		err = client.Ping(ctx) // TODO
 		if err != nil {
 			panic(err)
 		}
@@ -35,5 +35,5 @@ var LoginCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(LoginCmd)
+	RootCmd.AddCommand(StartGameCmd)
 }

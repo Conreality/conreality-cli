@@ -10,12 +10,12 @@ import (
 	"golang.org/x/net/context"
 )
 
-// PingCmd describes and implements the `concli ping` command
-var PingCmd = &cobra.Command{
-	Use:   "ping",
-	Short: "TODO",
+// SendMessageCmd describes and implements the `concli send-message` command
+var SendMessageCmd = &cobra.Command{
+	Use:   "send-message [FILE-PATH]",
+	Short: "Send a broadcast message",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.NoArgs,
+	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		client, err := api.Connect(master)
@@ -27,7 +27,7 @@ var PingCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
 		defer cancel()
 
-		err = client.Ping(ctx)
+		err = client.Ping(ctx) // TODO
 		if err != nil {
 			panic(err)
 		}
@@ -35,5 +35,5 @@ var PingCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(PingCmd)
+	RootCmd.AddCommand(SendMessageCmd)
 }
