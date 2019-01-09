@@ -28,7 +28,18 @@ var JoinUnitCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
-		err = client.Ping(ctx) // TODO
+		session, err := client.Authenticate(ctx, playerNick)
+		if err != nil {
+			panic(err)
+		}
+		defer session.Close()
+
+		unitID, err := strconv.Atoi(args[0]) // TODO: support unit names as well
+		if err != nil {
+			panic(err)
+		}
+
+		err = session.JoinUnit(ctx, model.UnitID(unitID))
 		if err != nil {
 			panic(err)
 		}
