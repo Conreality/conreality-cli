@@ -10,7 +10,8 @@ import (
 	"github.com/spf13/viper"
 )
 
-const master = "localhost:50051"
+const masterURL = "localhost:50051"
+const playerNick = "Admin"
 
 var configFile string
 var debug bool

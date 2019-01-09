@@ -18,7 +18,7 @@ var JoinGameCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 
-		client, err := api.Connect(master)
+		client, err := api.Connect(masterURL)
 		if err != nil {
 			panic(err)
 		}
@@ -27,7 +27,7 @@ var JoinGameCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
 		defer cancel()
 
-		_, err = client.Authenticate(ctx, "") // TODO
+		_, err = client.Authenticate(ctx, playerNick)
 		if err != nil {
 			panic(err)
 		}

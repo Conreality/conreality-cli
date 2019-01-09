@@ -18,7 +18,7 @@ var LeaveUnitCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 
-		client, err := api.Connect(master)
+		client, err := api.Connect(masterURL)
 		if err != nil {
 			panic(err)
 		}

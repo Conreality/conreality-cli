@@ -18,7 +18,7 @@ var SendMessageCmd = &cobra.Command{
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 
-		client, err := api.Connect(master)
+		client, err := api.Connect(masterURL)
 		if err != nil {
 			panic(err)
 		}

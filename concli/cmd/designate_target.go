@@ -18,7 +18,7 @@ var DesignateTargetCmd = &cobra.Command{
 	Args:  cobra.RangeArgs(2, 3),
 	Run: func(cmd *cobra.Command, args []string) {
 
-		client, err := api.Connect(master)
+		client, err := api.Connect(masterURL)
 		if err != nil {
 			panic(err)
 		}
