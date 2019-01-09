@@ -7,8 +7,7 @@ import (
 	"fmt"
 	"strconv"
 
-	api "github.com/conreality/conreality.go/sdk/client"
-	"github.com/conreality/conreality.go/sdk/model"
+	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
 )
 
@@ -20,7 +19,7 @@ var ListUnitsCmd = &cobra.Command{
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 
-		client, err := api.Connect(masterURL)
+		client, err := sdk.Connect(masterURL)
 		if err != nil {
 			panic(err)
 		}
@@ -43,7 +42,7 @@ var ListUnitsCmd = &cobra.Command{
 			}
 		}
 
-		units, err := session.ListUnits(ctx, model.UnitID(unitID))
+		units, err := session.ListUnits(ctx, sdk.UnitID(unitID))
 		if err != nil {
 			panic(err)
 		}

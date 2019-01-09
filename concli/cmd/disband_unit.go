@@ -6,8 +6,7 @@ import (
 	"context"
 	"strconv"
 
-	api "github.com/conreality/conreality.go/sdk/client"
-	"github.com/conreality/conreality.go/sdk/model"
+	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
 )
 
@@ -19,7 +18,7 @@ var DisbandUnitCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 
-		client, err := api.Connect(masterURL)
+		client, err := sdk.Connect(masterURL)
 		if err != nil {
 			panic(err)
 		}
@@ -39,7 +38,7 @@ var DisbandUnitCmd = &cobra.Command{
 			panic(err)
 		}
 
-		err = session.DisbandUnit(ctx, model.UnitID(unitID))
+		err = session.DisbandUnit(ctx, sdk.UnitID(unitID))
 		if err != nil {
 			panic(err)
 		}

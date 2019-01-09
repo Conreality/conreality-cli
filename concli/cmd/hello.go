@@ -6,7 +6,7 @@ import (
 	"context"
 	"fmt"
 
-	api "github.com/conreality/conreality.go/sdk/client"
+	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
 )
 
@@ -18,7 +18,7 @@ var HelloCmd = &cobra.Command{
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 
-		client, err := api.Connect(masterURL)
+		client, err := sdk.Connect(masterURL)
 		if err != nil {
 			panic(err)
 		}
