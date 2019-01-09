@@ -4,6 +4,8 @@ package cmd
 
 import (
 	"context"
+	"fmt"
+	"strconv"
 
 	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
@@ -26,9 +28,31 @@ var SendEventCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
-		err = client.Ping(ctx) // TODO
+		session, err := client.Authenticate(ctx, playerNick)
 		if err != nil {
 			panic(err)
+		}
+		defer session.Close()
+
+		predicate := args[0] // TODO: validate against controlled vocabulary
+
+		subjectID, err := strconv.Atoi(args[1]) // TODO: support object names as well
+		if err != nil {
+			panic(err)
+		}
+
+		objectID, err := strconv.Atoi(args[2]) // TODO: support object names as well
+		if err != nil {
+			panic(err)
+		}
+
+		event, err := session.SendEvent(ctx, predicate, sdk.ObjectID(subjectID), sdk.ObjectID(objectID))
+		if err != nil {
+			panic(err)
+		}
+
+		if verbose {
+			fmt.Printf("%d\n", event.ID)
 		}
 	},
 }
