@@ -3,9 +3,12 @@
 package cmd
 
 import (
+	"context"
+	"strconv"
+
 	api "github.com/conreality/conreality.go/sdk/client"
+	"github.com/conreality/conreality.go/sdk/model"
 	"github.com/spf13/cobra"
-	"golang.org/x/net/context"
 )
 
 // JoinUnitCmd describes and implements the `concli join-unit` command

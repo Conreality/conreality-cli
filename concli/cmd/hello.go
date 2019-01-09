@@ -3,11 +3,11 @@
 package cmd
 
 import (
+	"context"
 	"fmt"
 
 	api "github.com/conreality/conreality.go/sdk/client"
 	"github.com/spf13/cobra"
-	"golang.org/x/net/context"
 )
 
 // HelloCmd describes and implements the `concli hello` command

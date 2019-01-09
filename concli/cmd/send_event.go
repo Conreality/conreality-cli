@@ -3,9 +3,10 @@
 package cmd
 
 import (
+	"context"
+
 	api "github.com/conreality/conreality.go/sdk/client"
 	"github.com/spf13/cobra"
-	"golang.org/x/net/context"
 )
 
 // SendEventCmd describes and implements the `concli send-event` command
