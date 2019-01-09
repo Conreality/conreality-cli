@@ -3,7 +3,7 @@
 package cmd
 
 import (
-	"time"
+	"fmt"
 
 	api "github.com/conreality/conreality.go/sdk/client"
 	"github.com/spf13/cobra"
@@ -24,7 +24,7 @@ var FormUnitCmd = &cobra.Command{
 		}
 		defer client.Disconnect()
 
-		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
 		err = client.Ping(ctx) // TODO

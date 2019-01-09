@@ -3,8 +3,6 @@
 package cmd
 
 import (
-	"time"
-
 	api "github.com/conreality/conreality.go/sdk/client"
 	"github.com/spf13/cobra"
 	"golang.org/x/net/context"
@@ -24,7 +22,7 @@ var AddPlayerCmd = &cobra.Command{
 		}
 		defer client.Disconnect()
 
-		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
 		err = client.Ping(ctx) // TODO

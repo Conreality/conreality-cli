@@ -5,6 +5,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -12,6 +13,7 @@ import (
 
 const masterURL = "localhost:50051"
 const playerNick = "Admin"
+const timeout = 1 * time.Second
 
 var configFile string
 var debug bool
