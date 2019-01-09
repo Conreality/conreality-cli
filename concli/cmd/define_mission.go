@@ -4,6 +4,8 @@ package cmd
 
 import (
 	"context"
+	"io/ioutil"
+	"os"
 
 	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
@@ -15,7 +17,13 @@ var DefineMissionCmd = &cobra.Command{
 	Short: "Define the mission objective",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
 	Args:  cobra.NoArgs,
-	Run: func(cmd *cobra.Command, args []string) {
+	Run: func(cmd *cobra.Command, _ []string) {
+
+		bytes, err := ioutil.ReadAll(os.Stdin)
+		if err != nil {
+			panic(err)
+		}
+		input := string(bytes)
 
 		client, err := sdk.Connect(masterURL)
 		if err != nil {
@@ -26,7 +34,13 @@ var DefineMissionCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
-		err = client.Ping(ctx) // TODO
+		session, err := client.Authenticate(ctx, playerNick)
+		if err != nil {
+			panic(err)
+		}
+		defer session.Close()
+
+		err = session.DefineMission(ctx, input)
 		if err != nil {
 			panic(err)
 		}
