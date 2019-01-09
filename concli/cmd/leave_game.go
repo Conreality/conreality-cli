@@ -32,7 +32,7 @@ var LeaveGameCmd = &cobra.Command{
 		}
 		defer session.Close()
 
-		err = session.LeaveGame(ctx, "") // TODO: --reason
+		err = session.LeaveGame(ctx, "") // TODO: --notice
 		if err != nil {
 			panic(err)
 		}
