@@ -4,6 +4,7 @@ package cmd
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
@@ -26,9 +27,19 @@ var AddPlayerCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
-		err = client.Ping(ctx) // TODO
+		session, err := client.Authenticate(ctx, playerNick)
 		if err != nil {
 			panic(err)
+		}
+		defer session.Close()
+
+		player, err := session.AddPlayer(ctx, args[0])
+		if err != nil {
+			panic(err)
+		}
+
+		if verbose {
+			fmt.Printf("%d\n", player.ID)
 		}
 	},
 }
