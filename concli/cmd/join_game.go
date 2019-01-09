@@ -4,6 +4,7 @@ package cmd
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
@@ -11,10 +12,10 @@ import (
 
 // JoinGameCmd describes and implements the `concli join-game` command
 var JoinGameCmd = &cobra.Command{
-	Use:   "join-game [GAME-URL]",
-	Short: "Join a game",
+	Use:   "join-game",
+	Short: "Join the game",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.ExactArgs(1),
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		client, err := sdk.Connect(masterURL)
@@ -26,9 +27,19 @@ var JoinGameCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
-		_, err = client.Authenticate(ctx, playerNick)
+		session, err := client.Authenticate(ctx, playerNick)
 		if err != nil {
 			panic(err)
+		}
+		defer session.Close()
+
+		player, err := session.JoinGame(ctx)
+		if err != nil {
+			panic(err)
+		}
+
+		if verbose {
+			fmt.Printf("%d\n", player.ID)
 		}
 	},
 }
