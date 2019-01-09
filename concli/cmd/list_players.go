@@ -4,6 +4,8 @@ package cmd
 
 import (
 	"context"
+	"fmt"
+	"strconv"
 
 	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
@@ -26,9 +28,33 @@ var ListPlayersCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
-		err = client.Ping(ctx) // TODO
+		session, err := client.Authenticate(ctx, playerNick)
 		if err != nil {
 			panic(err)
+		}
+		defer session.Close()
+
+		unitID := 0
+		if len(args) > 0 {
+			unitID, err = strconv.Atoi(args[0]) // TODO: support unit names as well
+			if err != nil {
+				panic(err)
+			}
+		}
+
+		players, err := session.ListPlayers(ctx, sdk.UnitID(unitID))
+		if err != nil {
+			panic(err)
+		}
+
+		for _, player := range players {
+			if debug {
+				fmt.Printf("%d\n", player.ID)
+			} else if verbose {
+				fmt.Printf("Player #%d\n", player.ID) // TODO
+			} else {
+				fmt.Printf("#%d\n", player.ID) // TODO
+			}
 		}
 	},
 }

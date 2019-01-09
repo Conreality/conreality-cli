@@ -11,10 +11,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// ListUnitsCmd describes and implements the `concli list-units` command
-var ListUnitsCmd = &cobra.Command{
-	Use:   "list-units [UNIT-NAME]",
-	Short: "List all units on the team or a parent unit",
+// ListTargetsCmd describes and implements the `concli list-targets` command
+var ListTargetsCmd = &cobra.Command{
+	Use:   "list-targets [UNIT-NAME]",
+	Short: "List all designated targets for the team or a unit",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -42,23 +42,23 @@ var ListUnitsCmd = &cobra.Command{
 			}
 		}
 
-		units, err := session.ListUnits(ctx, sdk.UnitID(unitID))
+		targets, err := session.ListTargets(ctx, sdk.UnitID(unitID))
 		if err != nil {
 			panic(err)
 		}
 
-		for _, unit := range units {
+		for _, target := range targets {
 			if debug {
-				fmt.Printf("%d\n", unit.ID)
+				fmt.Printf("%d\n", target.ID)
 			} else if verbose {
-				fmt.Printf("Unit #%d\n", unit.ID) // TODO
+				fmt.Printf("Target #%d\n", target.ID) // TODO
 			} else {
-				fmt.Printf("#%d\n", unit.ID) // TODO
+				fmt.Printf("#%d\n", target.ID) // TODO
 			}
 		}
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(ListUnitsCmd)
+	RootCmd.AddCommand(ListTargetsCmd)
 }
