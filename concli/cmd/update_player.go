@@ -26,7 +26,13 @@ var UpdatePlayerCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
-		err = client.Ping(ctx) // TODO
+		session, err := client.Authenticate(ctx, playerNick)
+		if err != nil {
+			panic(err)
+		}
+		defer session.Close()
+
+		err = session.UpdatePlayer(ctx, 42) // TODO: --heartbeat
 		if err != nil {
 			panic(err)
 		}
