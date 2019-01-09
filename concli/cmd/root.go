@@ -7,6 +7,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -24,7 +25,7 @@ var RootCmd = &cobra.Command{
 	Use:     "concli",
 	Short:   "Conreality command-line interface (CLI)",
 	Long:    `This is the command-line interface (CLI) for Conreality.`,
-	Version: "0.0.0", // TODO
+	Version: sdk.Version,
 }
 
 // Execute implements the `concli` command
