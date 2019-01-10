@@ -4,19 +4,26 @@ package cmd
 
 import (
 	"context"
-	"strconv"
+	"io/ioutil"
+	"os"
 
 	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
 )
 
-// LeaveUnitCmd describes and implements the `concli leave-unit` command
-var LeaveUnitCmd = &cobra.Command{
-	Use:   "leave-unit UNIT-NAME",
-	Short: "Leave a unit",
+// GameMissionCmd describes and implements the `concli game mission` command
+var GameMissionCmd = &cobra.Command{
+	Use:   "mission",
+	Short: "Define the game mission objective",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.ExactArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
+	Args:  cobra.NoArgs,
+	Run: func(cmd *cobra.Command, _ []string) {
+
+		bytes, err := ioutil.ReadAll(os.Stdin)
+		if err != nil {
+			panic(err)
+		}
+		input := string(bytes)
 
 		client, err := sdk.Connect(masterURL)
 		if err != nil {
@@ -33,12 +40,7 @@ var LeaveUnitCmd = &cobra.Command{
 		}
 		defer session.Close()
 
-		unitID, err := strconv.Atoi(args[0]) // TODO: support unit names as well
-		if err != nil {
-			panic(err)
-		}
-
-		err = session.LeaveUnit(ctx, sdk.UnitID(unitID))
+		err = session.DefineMission(ctx, input)
 		if err != nil {
 			panic(err)
 		}
@@ -46,5 +48,5 @@ var LeaveUnitCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(LeaveUnitCmd)
+	GameCmd.AddCommand(GameMissionCmd)
 }

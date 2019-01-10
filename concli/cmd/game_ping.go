@@ -4,16 +4,15 @@ package cmd
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
 )
 
-// HelloCmd describes and implements the `concli hello` command
-var HelloCmd = &cobra.Command{
-	Use:   "hello",
-	Short: "TODO", // TODO
+// GamePingCmd describes and implements the `concli game ping` command
+var GamePingCmd = &cobra.Command{
+	Use:   "ping",
+	Short: "Ping the game's master server",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -27,14 +26,13 @@ var HelloCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
-		masterVersion, err := client.Hello(ctx)
+		err = client.Ping(ctx)
 		if err != nil {
 			panic(err)
 		}
-		fmt.Printf("version: %s\n", masterVersion)
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(HelloCmd)
+	GameCmd.AddCommand(GamePingCmd)
 }

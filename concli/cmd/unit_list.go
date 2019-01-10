@@ -4,18 +4,19 @@ package cmd
 
 import (
 	"context"
+	"fmt"
 	"strconv"
 
 	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
 )
 
-// JoinUnitCmd describes and implements the `concli join-unit` command
-var JoinUnitCmd = &cobra.Command{
-	Use:   "join-unit UNIT-NAME",
-	Short: "Join a unit",
+// UnitListCmd describes and implements the `concli unit list` command
+var UnitListCmd = &cobra.Command{
+	Use:   "list [UNIT-NAME]",
+	Short: "List all units on the team or a parent unit",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.ExactArgs(1),
+	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		client, err := sdk.Connect(masterURL)
@@ -33,18 +34,31 @@ var JoinUnitCmd = &cobra.Command{
 		}
 		defer session.Close()
 
-		unitID, err := strconv.Atoi(args[0]) // TODO: support unit names as well
+		unitID := 0
+		if len(args) > 0 {
+			unitID, err = strconv.Atoi(args[0]) // TODO: support unit names as well
+			if err != nil {
+				panic(err)
+			}
+		}
+
+		units, err := session.ListUnits(ctx, sdk.UnitID(unitID))
 		if err != nil {
 			panic(err)
 		}
 
-		err = session.JoinUnit(ctx, sdk.UnitID(unitID))
-		if err != nil {
-			panic(err)
+		for _, unit := range units {
+			if debug {
+				fmt.Printf("%d\n", unit.ID)
+			} else if verbose {
+				fmt.Printf("Unit #%d\n", unit.ID) // TODO
+			} else {
+				fmt.Printf("#%d\n", unit.ID) // TODO
+			}
 		}
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(JoinUnitCmd)
+	UnitCmd.AddCommand(UnitListCmd)
 }

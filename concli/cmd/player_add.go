@@ -4,17 +4,18 @@ package cmd
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
 )
 
-// PauseGameCmd describes and implements the `concli pause-game` command
-var PauseGameCmd = &cobra.Command{
-	Use:   "pause-game",
-	Short: "Pause the game temporarily",
+// PlayerCmdAdd describes and implements the `concli player add` command
+var PlayerCmdAdd = &cobra.Command{
+	Use:   "add PLAYER-NAME",
+	Short: "Add a new player to the game",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.NoArgs,
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		client, err := sdk.Connect(masterURL)
@@ -32,13 +33,17 @@ var PauseGameCmd = &cobra.Command{
 		}
 		defer session.Close()
 
-		err = session.PauseGame(ctx, "") // TODO: --notice
+		player, err := session.AddPlayer(ctx, args[0])
 		if err != nil {
 			panic(err)
+		}
+
+		if verbose {
+			fmt.Printf("%d\n", player.ID)
 		}
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(PauseGameCmd)
+	PlayerCmd.AddCommand(PlayerCmdAdd)
 }

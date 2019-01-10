@@ -11,10 +11,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// ListPlayersCmd describes and implements the `concli list-players` command
-var ListPlayersCmd = &cobra.Command{
-	Use:   "list-players [UNIT-NAME]",
-	Short: "List all players on the team or a unit",
+// TargetListCmd describes and implements the `concli target list` command
+var TargetListCmd = &cobra.Command{
+	Use:   "list [UNIT-NAME]",
+	Short: "List all designated targets for the team or a unit",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -42,23 +42,23 @@ var ListPlayersCmd = &cobra.Command{
 			}
 		}
 
-		players, err := session.ListPlayers(ctx, sdk.UnitID(unitID))
+		targets, err := session.ListTargets(ctx, sdk.UnitID(unitID))
 		if err != nil {
 			panic(err)
 		}
 
-		for _, player := range players {
+		for _, target := range targets {
 			if debug {
-				fmt.Printf("%d\n", player.ID)
+				fmt.Printf("%d\n", target.ID)
 			} else if verbose {
-				fmt.Printf("Player #%d\n", player.ID) // TODO
+				fmt.Printf("Target #%d\n", target.ID) // TODO
 			} else {
-				fmt.Printf("#%d\n", player.ID) // TODO
+				fmt.Printf("#%d\n", target.ID) // TODO
 			}
 		}
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(ListPlayersCmd)
+	TargetCmd.AddCommand(TargetListCmd)
 }

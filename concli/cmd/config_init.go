@@ -9,8 +9,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// InitCmd describes and implements the `concli init` command
-var InitCmd = &cobra.Command{
+// ConfigInitCmd describes and implements the `concli config init` command
+var ConfigInitCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Initialize the configuration directory",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
@@ -43,5 +43,5 @@ var InitCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(InitCmd)
+	ConfigCmd.AddCommand(ConfigInitCmd)
 }

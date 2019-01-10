@@ -9,12 +9,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// LeaveGameCmd describes and implements the `concli leave-game` command
-var LeaveGameCmd = &cobra.Command{
-	Use:   "leave-game",
-	Short: "Leave the game",
+// TargetDesignateCmd describes and implements the `concli target designate` command
+var TargetDesignateCmd = &cobra.Command{
+	Use:   "designate X-POS Y-POS [Z-POS]",
+	Short: "Designate a target for the unit",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.NoArgs,
+	Args:  cobra.RangeArgs(2, 3),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		client, err := sdk.Connect(masterURL)
@@ -26,13 +26,7 @@ var LeaveGameCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
-		session, err := client.Authenticate(ctx, playerNick)
-		if err != nil {
-			panic(err)
-		}
-		defer session.Close()
-
-		err = session.LeaveGame(ctx, "") // TODO: --notice
+		err = client.Ping(ctx) // TODO
 		if err != nil {
 			panic(err)
 		}
@@ -40,5 +34,5 @@ var LeaveGameCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(LeaveGameCmd)
+	TargetCmd.AddCommand(TargetDesignateCmd)
 }

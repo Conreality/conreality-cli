@@ -9,9 +9,9 @@ import (
 	"github.com/spf13/viper"
 )
 
-// ShowConfigCmd describes and implements the `concli show-config` command
-var ShowConfigCmd = &cobra.Command{
-	Use:   "show-config [VAR-NAME]",
+// ConfigGetCmd describes and implements the `concli config get` command
+var ConfigGetCmd = &cobra.Command{
+	Use:   "get [VAR-NAME]",
 	Short: "Show configuration variables",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
 	Args:  cobra.MinimumNArgs(0),
@@ -30,5 +30,5 @@ var ShowConfigCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(ShowConfigCmd)
+	ConfigCmd.AddCommand(ConfigGetCmd)
 }

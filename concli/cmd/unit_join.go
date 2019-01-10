@@ -4,26 +4,19 @@ package cmd
 
 import (
 	"context"
-	"io/ioutil"
-	"os"
+	"strconv"
 
 	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
 )
 
-// DefineMissionCmd describes and implements the `concli define-mission` command
-var DefineMissionCmd = &cobra.Command{
-	Use:   "define-mission",
-	Short: "Define the mission objective",
+// UnitJoinCmd describes and implements the `concli unit join` command
+var UnitJoinCmd = &cobra.Command{
+	Use:   "join UNIT-NAME",
+	Short: "Join a unit",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.NoArgs,
-	Run: func(cmd *cobra.Command, _ []string) {
-
-		bytes, err := ioutil.ReadAll(os.Stdin)
-		if err != nil {
-			panic(err)
-		}
-		input := string(bytes)
+	Args:  cobra.ExactArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
 
 		client, err := sdk.Connect(masterURL)
 		if err != nil {
@@ -40,7 +33,12 @@ var DefineMissionCmd = &cobra.Command{
 		}
 		defer session.Close()
 
-		err = session.DefineMission(ctx, input)
+		unitID, err := strconv.Atoi(args[0]) // TODO: support unit names as well
+		if err != nil {
+			panic(err)
+		}
+
+		err = session.JoinUnit(ctx, sdk.UnitID(unitID))
 		if err != nil {
 			panic(err)
 		}
@@ -48,5 +46,5 @@ var DefineMissionCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(DefineMissionCmd)
+	UnitCmd.AddCommand(UnitJoinCmd)
 }

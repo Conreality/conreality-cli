@@ -4,19 +4,18 @@ package cmd
 
 import (
 	"context"
-	"fmt"
 	"strconv"
 
 	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
 )
 
-// SendEventCmd describes and implements the `concli send-event` command
-var SendEventCmd = &cobra.Command{
-	Use:   "send-event PREDICATE-ID SUBJECT-NAME OBJECT-NAME",
-	Short: "Send a broadcast event",
+// UnitDisbandCmd describes and implements the `concli unit disband` command
+var UnitDisbandCmd = &cobra.Command{
+	Use:   "disband UNIT-NAME",
+	Short: "Disband a unit",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.ExactArgs(3),
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		client, err := sdk.Connect(masterURL)
@@ -34,29 +33,18 @@ var SendEventCmd = &cobra.Command{
 		}
 		defer session.Close()
 
-		predicate := args[0] // TODO: validate against controlled vocabulary
-
-		subjectID, err := strconv.Atoi(args[1]) // TODO: support object names as well
+		unitID, err := strconv.Atoi(args[0]) // TODO: support unit names as well
 		if err != nil {
 			panic(err)
 		}
 
-		objectID, err := strconv.Atoi(args[2]) // TODO: support object names as well
+		err = session.DisbandUnit(ctx, sdk.UnitID(unitID))
 		if err != nil {
 			panic(err)
-		}
-
-		event, err := session.SendEvent(ctx, predicate, sdk.ObjectID(subjectID), sdk.ObjectID(objectID))
-		if err != nil {
-			panic(err)
-		}
-
-		if verbose {
-			fmt.Printf("%d\n", event.ID)
 		}
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(SendEventCmd)
+	UnitCmd.AddCommand(UnitDisbandCmd)
 }

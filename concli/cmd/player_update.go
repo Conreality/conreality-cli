@@ -9,12 +9,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// DefineTheaterCmd describes and implements the `concli define-theater` command
-var DefineTheaterCmd = &cobra.Command{
-	Use:   "define-theater NW-GPS NE-GPS SW-GPS SE-GPS",
-	Short: "Define the theater boundaries",
+// PlayerUpdateCmd describes and implements the `concli player update` command
+var PlayerUpdateCmd = &cobra.Command{
+	Use:   "update",
+	Short: "Update player status",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.ExactArgs(4),
+	Args:  cobra.MinimumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		client, err := sdk.Connect(masterURL)
@@ -26,7 +26,13 @@ var DefineTheaterCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
-		err = client.Ping(ctx) // TODO
+		session, err := client.Authenticate(ctx, playerNick)
+		if err != nil {
+			panic(err)
+		}
+		defer session.Close()
+
+		err = session.UpdatePlayer(ctx, 42) // TODO: --heartbeat
 		if err != nil {
 			panic(err)
 		}
@@ -34,5 +40,5 @@ var DefineTheaterCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(DefineTheaterCmd)
+	PlayerCmd.AddCommand(PlayerUpdateCmd)
 }

@@ -4,27 +4,18 @@ package cmd
 
 import (
 	"context"
-	"fmt"
-	"io/ioutil"
-	"os"
 
 	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
 )
 
-// SendMessageCmd describes and implements the `concli send-message` command
-var SendMessageCmd = &cobra.Command{
-	Use:   "send-message", // TODO: [FILE-PATH]
-	Short: "Send a broadcast message",
+// GameLeaveCmd describes and implements the `concli game leave` command
+var GameLeaveCmd = &cobra.Command{
+	Use:   "leave",
+	Short: "Leave the game",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.NoArgs, // TODO: cobra.MaximumNArgs(1),
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
-
-		bytes, err := ioutil.ReadAll(os.Stdin)
-		if err != nil {
-			panic(err)
-		}
-		input := string(bytes)
 
 		client, err := sdk.Connect(masterURL)
 		if err != nil {
@@ -41,17 +32,13 @@ var SendMessageCmd = &cobra.Command{
 		}
 		defer session.Close()
 
-		message, err := session.SendMessage(ctx, input)
+		err = session.LeaveGame(ctx, "") // TODO: --notice
 		if err != nil {
 			panic(err)
-		}
-
-		if verbose {
-			fmt.Printf("%d\n", message.ID)
 		}
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(SendMessageCmd)
+	GameCmd.AddCommand(GameLeaveCmd)
 }

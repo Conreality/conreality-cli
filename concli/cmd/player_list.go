@@ -11,10 +11,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// ListUnitsCmd describes and implements the `concli list-units` command
-var ListUnitsCmd = &cobra.Command{
-	Use:   "list-units [UNIT-NAME]",
-	Short: "List all units on the team or a parent unit",
+// PlayerListCmd describes and implements the `concli player list` command
+var PlayerListCmd = &cobra.Command{
+	Use:   "list [UNIT-NAME]",
+	Short: "List all players on the team or a unit",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -42,23 +42,23 @@ var ListUnitsCmd = &cobra.Command{
 			}
 		}
 
-		units, err := session.ListUnits(ctx, sdk.UnitID(unitID))
+		players, err := session.ListPlayers(ctx, sdk.UnitID(unitID))
 		if err != nil {
 			panic(err)
 		}
 
-		for _, unit := range units {
+		for _, player := range players {
 			if debug {
-				fmt.Printf("%d\n", unit.ID)
+				fmt.Printf("%d\n", player.ID)
 			} else if verbose {
-				fmt.Printf("Unit #%d\n", unit.ID) // TODO
+				fmt.Printf("Player #%d\n", player.ID) // TODO
 			} else {
-				fmt.Printf("#%d\n", unit.ID) // TODO
+				fmt.Printf("#%d\n", player.ID) // TODO
 			}
 		}
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(ListUnitsCmd)
+	PlayerCmd.AddCommand(PlayerListCmd)
 }

@@ -4,17 +4,18 @@ package cmd
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
 )
 
-// UpdatePlayerCmd describes and implements the `concli update-player` command
-var UpdatePlayerCmd = &cobra.Command{
-	Use:   "update-player",
-	Short: "Update player status",
+// UnitLeaveCmd describes and implements the `concli unit leave` command
+var UnitLeaveCmd = &cobra.Command{
+	Use:   "leave UNIT-NAME",
+	Short: "Leave a unit",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.MinimumNArgs(0),
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		client, err := sdk.Connect(masterURL)
@@ -32,7 +33,12 @@ var UpdatePlayerCmd = &cobra.Command{
 		}
 		defer session.Close()
 
-		err = session.UpdatePlayer(ctx, 42) // TODO: --heartbeat
+		unitID, err := strconv.Atoi(args[0]) // TODO: support unit names as well
+		if err != nil {
+			panic(err)
+		}
+
+		err = session.LeaveUnit(ctx, sdk.UnitID(unitID))
 		if err != nil {
 			panic(err)
 		}
@@ -40,5 +46,5 @@ var UpdatePlayerCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(UpdatePlayerCmd)
+	UnitCmd.AddCommand(UnitLeaveCmd)
 }

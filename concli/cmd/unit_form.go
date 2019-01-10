@@ -10,9 +10,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// FormUnitCmd describes and implements the `concli form-unit` command
-var FormUnitCmd = &cobra.Command{
-	Use:   "form-unit UNIT-NAME",
+// UnitFormCmd describes and implements the `concli unit form` command
+var UnitFormCmd = &cobra.Command{
+	Use:   "form UNIT-NAME",
 	Short: "Form a new unit",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
 	Args:  cobra.ExactArgs(1),
@@ -45,5 +45,5 @@ var FormUnitCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(FormUnitCmd)
+	UnitCmd.AddCommand(UnitFormCmd)
 }

@@ -5,18 +5,26 @@ package cmd
 import (
 	"context"
 	"fmt"
+	"io/ioutil"
+	"os"
 
 	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
 )
 
-// JoinGameCmd describes and implements the `concli join-game` command
-var JoinGameCmd = &cobra.Command{
-	Use:   "join-game",
-	Short: "Join the game",
+// MessageSendCmd describes and implements the `concli message send` command
+var MessageSendCmd = &cobra.Command{
+	Use:   "send", // TODO: [FILE-PATH]
+	Short: "Send a broadcast message",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.NoArgs,
+	Args:  cobra.NoArgs, // TODO: cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
+
+		bytes, err := ioutil.ReadAll(os.Stdin)
+		if err != nil {
+			panic(err)
+		}
+		input := string(bytes)
 
 		client, err := sdk.Connect(masterURL)
 		if err != nil {
@@ -33,17 +41,17 @@ var JoinGameCmd = &cobra.Command{
 		}
 		defer session.Close()
 
-		player, err := session.JoinGame(ctx)
+		message, err := session.SendMessage(ctx, input)
 		if err != nil {
 			panic(err)
 		}
 
 		if verbose {
-			fmt.Printf("%d\n", player.ID)
+			fmt.Printf("%d\n", message.ID)
 		}
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(JoinGameCmd)
+	MessageCmd.AddCommand(MessageSendCmd)
 }

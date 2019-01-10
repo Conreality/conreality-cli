@@ -9,12 +9,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// PingMasterCmd describes and implements the `concli ping-master` command
-var PingMasterCmd = &cobra.Command{
-	Use:   "ping-master",
-	Short: "Ping the master server",
+// GameTheaterCmd describes and implements the `concli game theater` command
+var GameTheaterCmd = &cobra.Command{
+	Use:   "theater NW-GPS NE-GPS SW-GPS SE-GPS",
+	Short: "Define the game theater boundaries",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.NoArgs,
+	Args:  cobra.ExactArgs(4),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		client, err := sdk.Connect(masterURL)
@@ -26,7 +26,7 @@ var PingMasterCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
-		err = client.Ping(ctx)
+		err = client.Ping(ctx) // TODO
 		if err != nil {
 			panic(err)
 		}
@@ -34,5 +34,5 @@ var PingMasterCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(PingMasterCmd)
+	GameCmd.AddCommand(GameTheaterCmd)
 }

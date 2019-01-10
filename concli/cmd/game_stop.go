@@ -9,12 +9,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// DesignateTargetCmd describes and implements the `concli designate-target` command
-var DesignateTargetCmd = &cobra.Command{
-	Use:   "designate-target X-POS Y-POS [Z-POS]",
-	Short: "Designate a target for the unit",
+// GameStopCmd describes and implements the `concli game stop` command
+var GameStopCmd = &cobra.Command{
+	Use:   "stop",
+	Short: "Stop the game altogether",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.RangeArgs(2, 3),
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		client, err := sdk.Connect(masterURL)
@@ -26,7 +26,13 @@ var DesignateTargetCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
-		err = client.Ping(ctx) // TODO
+		session, err := client.Authenticate(ctx, playerNick)
+		if err != nil {
+			panic(err)
+		}
+		defer session.Close()
+
+		err = session.StopGame(ctx, "") // TODO: --notice
 		if err != nil {
 			panic(err)
 		}
@@ -34,5 +40,5 @@ var DesignateTargetCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(DesignateTargetCmd)
+	GameCmd.AddCommand(GameStopCmd)
 }

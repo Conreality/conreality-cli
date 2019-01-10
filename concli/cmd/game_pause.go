@@ -9,10 +9,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// StartGameCmd describes and implements the `concli start-game` command
-var StartGameCmd = &cobra.Command{
-	Use:   "start-game",
-	Short: "Start the game",
+// GamePauseCmd describes and implements the `concli game pause` command
+var GamePauseCmd = &cobra.Command{
+	Use:   "pause",
+	Short: "Pause the game temporarily",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -32,7 +32,7 @@ var StartGameCmd = &cobra.Command{
 		}
 		defer session.Close()
 
-		err = session.StartGame(ctx, "") // TODO: --notice
+		err = session.PauseGame(ctx, "") // TODO: --notice
 		if err != nil {
 			panic(err)
 		}
@@ -40,5 +40,5 @@ var StartGameCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(StartGameCmd)
+	GameCmd.AddCommand(GamePauseCmd)
 }

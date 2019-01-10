@@ -9,10 +9,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// StopGameCmd describes and implements the `concli stop-game` command
-var StopGameCmd = &cobra.Command{
-	Use:   "stop-game",
-	Short: "Stop the game altogether",
+// GameStartCmd describes and implements the `concli game start` command
+var GameStartCmd = &cobra.Command{
+	Use:   "start",
+	Short: "Start the game",
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -32,7 +32,7 @@ var StopGameCmd = &cobra.Command{
 		}
 		defer session.Close()
 
-		err = session.StopGame(ctx, "") // TODO: --notice
+		err = session.StartGame(ctx, "") // TODO: --notice
 		if err != nil {
 			panic(err)
 		}
@@ -40,5 +40,5 @@ var StopGameCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(StopGameCmd)
+	GameCmd.AddCommand(GameStartCmd)
 }

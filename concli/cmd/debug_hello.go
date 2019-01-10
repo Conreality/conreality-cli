@@ -10,12 +10,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// AddPlayerCmd describes and implements the `concli add-player` command
-var AddPlayerCmd = &cobra.Command{
-	Use:   "add-player PLAYER-NAME",
-	Short: "Add a new player to the game",
+// DebugHelloCmd describes and implements the `concli debug hello` command
+var DebugHelloCmd = &cobra.Command{
+	Use:   "hello",
+	Short: "TODO", // TODO
 	Long:  `This is the command-line interface (CLI) for Conreality.`,
-	Args:  cobra.ExactArgs(1),
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		client, err := sdk.Connect(masterURL)
@@ -27,23 +27,14 @@ var AddPlayerCmd = &cobra.Command{
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
-		session, err := client.Authenticate(ctx, playerNick)
+		masterVersion, err := client.Hello(ctx)
 		if err != nil {
 			panic(err)
 		}
-		defer session.Close()
-
-		player, err := session.AddPlayer(ctx, args[0])
-		if err != nil {
-			panic(err)
-		}
-
-		if verbose {
-			fmt.Printf("%d\n", player.ID)
-		}
+		fmt.Printf("version: %s\n", masterVersion)
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(AddPlayerCmd)
+	DebugCmd.AddCommand(DebugHelloCmd)
 }
