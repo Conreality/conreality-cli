@@ -36,12 +36,12 @@ var EventSendCmd = &cobra.Command{
 
 		predicate := args[0] // TODO: validate against controlled vocabulary
 
-		subjectID, err := strconv.Atoi(args[1]) // TODO: support object names as well
+		subjectID, err := resolveEntityArg(ctx, session, args[1])
 		if err != nil {
 			panic(err)
 		}
 
-		objectID, err := strconv.Atoi(args[2]) // TODO: support object names as well
+		objectID, err := resolveEntityArg(ctx, session, args[2])
 		if err != nil {
 			panic(err)
 		}
@@ -55,6 +55,21 @@ var EventSendCmd = &cobra.Command{
 			fmt.Printf("%d\n", event.ID)
 		}
 	},
+}
+
+func resolveEntityArg(ctx context.Context, session *sdk.Session, arg string) (sdk.EntityID, error) {
+	entityID, err := strconv.Atoi(arg)
+	if err != nil {
+		entity, err := session.LookupEntityByName(ctx, arg)
+		if err != nil {
+			panic(err)
+		}
+		if entity == nil {
+			return 0, fmt.Errorf("Unknown entity: %s", arg)
+		}
+		entityID = int(entity.ID)
+	}
+	return sdk.EntityID(entityID), nil
 }
 
 func init() {

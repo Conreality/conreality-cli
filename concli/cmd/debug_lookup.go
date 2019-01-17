@@ -38,7 +38,7 @@ var DebugLookupCmd = &cobra.Command{
 			panic(err)
 		}
 
-		if verbose {
+		if verbose && entity != nil {
 			fmt.Printf("%d\n", entity.ID)
 		}
 	},
