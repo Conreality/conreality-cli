@@ -9,7 +9,7 @@ import (
 // GameCmd describes and implements the `concli game` command
 var GameCmd = &cobra.Command{
 	Use:   "game",
-	Short: "Game management",
+	Short: "Game management [WIP]",
 	Long:  "Conreality Command-Line Interface (CLI): Game Management",
 	Args:  cobra.NoArgs,
 }

@@ -9,7 +9,7 @@ import (
 // MessageCmd describes and implements the `concli message` command
 var MessageCmd = &cobra.Command{
 	Use:   "message",
-	Short: "Message sending",
+	Short: "Message sending [WIP]",
 	Long:  "Conreality Command-Line Interface (CLI): Message Sending",
 	Args:  cobra.NoArgs,
 }

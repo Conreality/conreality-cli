@@ -9,7 +9,7 @@ import (
 // PlayerCmd describes and implements the `concli player` command
 var PlayerCmd = &cobra.Command{
 	Use:   "player",
-	Short: "Player management",
+	Short: "Player management [WIP]",
 	Long:  "Conreality Command-Line Interface (CLI): Player Management",
 	Args:  cobra.NoArgs,
 }

@@ -9,7 +9,7 @@ import (
 // DebugCmd describes and implements the `concli debug` command
 var DebugCmd = &cobra.Command{
 	Use:   "debug",
-	Short: "Debugging support",
+	Short: "Debugging support [WIP]",
 	Long:  "Conreality Command-Line Interface (CLI): Debugging Support",
 	Args:  cobra.NoArgs,
 }

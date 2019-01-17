@@ -9,7 +9,7 @@ import (
 // TargetCmd describes and implements the `concli target` command
 var TargetCmd = &cobra.Command{
 	Use:   "target",
-	Short: "Target designation",
+	Short: "Target designation [WIP]",
 	Long:  "Conreality Command-Line Interface (CLI): Target Designation",
 	Args:  cobra.NoArgs,
 }
