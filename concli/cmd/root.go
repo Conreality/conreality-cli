@@ -23,8 +23,7 @@ var verbose bool
 // RootCmd describes the `concli` command
 var RootCmd = &cobra.Command{
 	Use:     "concli",
-	Short:   "Conreality command-line interface (CLI)",
-	Long:    `This is the command-line interface (CLI) for Conreality.`,
+	Short:   "Conreality Command-Line Interface (CLI)",
 	Version: sdk.Version,
 }
 

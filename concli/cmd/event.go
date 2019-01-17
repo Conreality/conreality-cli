@@ -9,8 +9,8 @@ import (
 // EventCmd describes and implements the `concli event` command
 var EventCmd = &cobra.Command{
 	Use:   "event",
-	Short: "TODO",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Short: "Event sending",
+	Long:  "Conreality Command-Line Interface (CLI): Event Sending",
 	Args:  cobra.NoArgs,
 }
 

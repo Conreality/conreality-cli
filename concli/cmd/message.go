@@ -9,8 +9,8 @@ import (
 // MessageCmd describes and implements the `concli message` command
 var MessageCmd = &cobra.Command{
 	Use:   "message",
-	Short: "TODO",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Short: "Message sending",
+	Long:  "Conreality Command-Line Interface (CLI): Message Sending",
 	Args:  cobra.NoArgs,
 }
 

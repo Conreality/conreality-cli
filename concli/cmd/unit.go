@@ -9,8 +9,8 @@ import (
 // UnitCmd describes and implements the `concli unit` command
 var UnitCmd = &cobra.Command{
 	Use:   "unit",
-	Short: "TODO",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Short: "Unit management",
+	Long:  "Conreality Command-Line Interface (CLI): Unit Management",
 	Args:  cobra.NoArgs,
 }
 

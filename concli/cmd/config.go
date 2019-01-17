@@ -9,8 +9,8 @@ import (
 // ConfigCmd describes and implements the `concli config` command
 var ConfigCmd = &cobra.Command{
 	Use:   "config",
-	Short: "TODO",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Short: "Configuration management",
+	Long:  "Conreality Command-Line Interface (CLI): Configuration Management",
 	Args:  cobra.NoArgs,
 }
 

@@ -9,8 +9,8 @@ import (
 // DebugCmd describes and implements the `concli debug` command
 var DebugCmd = &cobra.Command{
 	Use:   "debug",
-	Short: "TODO",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Short: "Debugging support",
+	Long:  "Conreality Command-Line Interface (CLI): Debugging Support",
 	Args:  cobra.NoArgs,
 }
 
