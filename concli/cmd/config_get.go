@@ -13,7 +13,7 @@ import (
 var ConfigGetCmd = &cobra.Command{
 	Use:   "get [VAR-NAME]",
 	Short: "Show configuration variables",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Get Configuration",
 	Args:  cobra.MinimumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 

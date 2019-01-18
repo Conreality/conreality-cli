@@ -13,7 +13,7 @@ import (
 var GameLeaveCmd = &cobra.Command{
 	Use:   "leave",
 	Short: "Leave the game",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Leave Game",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 

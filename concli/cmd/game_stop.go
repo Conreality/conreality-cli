@@ -13,7 +13,7 @@ import (
 var GameStopCmd = &cobra.Command{
 	Use:   "stop",
 	Short: "Stop the game altogether",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Stop Game",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 

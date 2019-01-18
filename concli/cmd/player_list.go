@@ -15,7 +15,7 @@ import (
 var PlayerListCmd = &cobra.Command{
 	Use:   "list [UNIT-NAME]",
 	Short: "List all players on the team or a unit",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): List Players",
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 

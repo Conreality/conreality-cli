@@ -15,7 +15,7 @@ import (
 var EventSendCmd = &cobra.Command{
 	Use:   "send PREDICATE-ID SUBJECT-NAME OBJECT-NAME",
 	Short: "Send a broadcast event",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Send Event",
 	Args:  cobra.ExactArgs(3),
 	Run: func(cmd *cobra.Command, args []string) {
 

@@ -12,8 +12,8 @@ import (
 // GameTheaterCmd describes and implements the `concli game theater` command
 var GameTheaterCmd = &cobra.Command{
 	Use:   "theater NW-GPS NE-GPS SW-GPS SE-GPS",
-	Short: "Define the game theater boundaries",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Short: "Define the game theater boundaries [WIP]",
+	Long:  "Conreality Command-Line Interface (CLI): Define Theater",
 	Args:  cobra.ExactArgs(4),
 	Run: func(cmd *cobra.Command, args []string) {
 

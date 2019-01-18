@@ -14,7 +14,7 @@ import (
 var UnitFormCmd = &cobra.Command{
 	Use:   "form UNIT-NAME",
 	Short: "Form a new unit",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Form Unit",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 

@@ -14,7 +14,7 @@ import (
 var PlayerCmdAdd = &cobra.Command{
 	Use:   "add PLAYER-NAME",
 	Short: "Add a new player to the game",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Add Player",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 

@@ -13,7 +13,7 @@ import (
 var PlayerUpdateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Update player status",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Update Player",
 	Args:  cobra.MinimumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 

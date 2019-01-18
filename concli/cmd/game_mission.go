@@ -15,7 +15,7 @@ import (
 var GameMissionCmd = &cobra.Command{
 	Use:   "mission",
 	Short: "Define the game mission objective",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Define Mission",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, _ []string) {
 

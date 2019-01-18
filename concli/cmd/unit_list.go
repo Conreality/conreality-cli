@@ -15,7 +15,7 @@ import (
 var UnitListCmd = &cobra.Command{
 	Use:   "list [UNIT-NAME]",
 	Short: "List all units on the team or a parent unit",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): List Units",
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 

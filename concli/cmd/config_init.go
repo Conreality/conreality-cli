@@ -13,7 +13,7 @@ import (
 var ConfigInitCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Initialize the $HOME/.conreality configuration directory",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Initialize Configuration",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 

@@ -13,7 +13,7 @@ import (
 var GamePauseCmd = &cobra.Command{
 	Use:   "pause",
 	Short: "Pause the game temporarily",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Pause Game",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 

@@ -14,7 +14,7 @@ import (
 var DebugLookupCmd = &cobra.Command{
 	Use:   "lookup [ENTITY-NAME...]",
 	Short: "Lookup an entity ID based on its name",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Lookup Name",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 

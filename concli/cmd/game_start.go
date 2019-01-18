@@ -13,7 +13,7 @@ import (
 var GameStartCmd = &cobra.Command{
 	Use:   "start",
 	Short: "Start the game",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Start Game",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 

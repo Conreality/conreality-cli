@@ -14,7 +14,7 @@ import (
 var UnitLeaveCmd = &cobra.Command{
 	Use:   "leave UNIT-NAME",
 	Short: "Leave a unit",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Leave Unit",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 

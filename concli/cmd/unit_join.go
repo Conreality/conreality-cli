@@ -14,7 +14,7 @@ import (
 var UnitJoinCmd = &cobra.Command{
 	Use:   "join UNIT-NAME",
 	Short: "Join a unit",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Join Unit",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 

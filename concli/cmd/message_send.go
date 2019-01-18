@@ -16,7 +16,7 @@ import (
 var MessageSendCmd = &cobra.Command{
 	Use:   "send", // TODO: [FILE-PATH]
 	Short: "Send a broadcast message",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Send Message",
 	Args:  cobra.NoArgs, // TODO: cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 

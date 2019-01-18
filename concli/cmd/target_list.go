@@ -15,7 +15,7 @@ import (
 var TargetListCmd = &cobra.Command{
 	Use:   "list [UNIT-NAME]",
 	Short: "List all designated targets for the team or a unit",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): List Targets",
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 

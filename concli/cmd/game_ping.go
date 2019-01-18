@@ -13,7 +13,7 @@ import (
 var GamePingCmd = &cobra.Command{
 	Use:   "ping",
 	Short: "Ping the game's master server",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Ping Game",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 

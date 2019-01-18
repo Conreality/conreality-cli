@@ -14,7 +14,7 @@ import (
 var UnitDisbandCmd = &cobra.Command{
 	Use:   "disband UNIT-NAME",
 	Short: "Disband a unit",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Disband Unit",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 

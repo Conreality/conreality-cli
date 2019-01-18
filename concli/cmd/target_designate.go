@@ -13,7 +13,7 @@ import (
 var TargetDesignateCmd = &cobra.Command{
 	Use:   "designate X-POS Y-POS [Z-POS]",
 	Short: "Designate a target for the unit",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Designate Target",
 	Args:  cobra.RangeArgs(2, 3),
 	Run: func(cmd *cobra.Command, args []string) {
 

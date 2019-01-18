@@ -14,7 +14,7 @@ import (
 var GameJoinCmd = &cobra.Command{
 	Use:   "join",
 	Short: "Join the game",
-	Long:  `This is the command-line interface (CLI) for Conreality.`,
+	Long:  "Conreality Command-Line Interface (CLI): Join Game",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 
