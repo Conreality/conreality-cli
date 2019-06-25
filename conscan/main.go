@@ -19,7 +19,7 @@ func main() {
 	}
 
 	for game := range games {
-		fmt.Printf("Discovered '%s' at grpc://%s:%d...\n", game.Name, game.Host, game.Port)
+		fmt.Printf("Discovered '%s' at %s...\n", game.Name, game.URL())
 	}
 
 	<-ctx.Done()

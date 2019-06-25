@@ -19,7 +19,7 @@ func main() {
 	}
 
 	for game := range games {
-		fmt.Printf("%s: Connecting to grpc://%s:%d...\n", game.Name, game.Host, game.Port)
+		fmt.Printf("%s: Connecting to %s...\n", game.Name, game.URL())
 		go monitorGame(ctx, game)
 	}
 
