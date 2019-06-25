@@ -11,19 +11,16 @@ import (
 )
 
 func main() {
-	games := make(chan *sdk.GameEndpoint)
-
 	ctx := context.Background()
-	err := sdk.DiscoverGames(ctx, games)
+
+	games, err := sdk.DiscoverGames(ctx)
 	if err != nil {
 		panic(err)
 	}
 
-	go func(games <-chan *sdk.GameEndpoint) {
-		for game := range games {
-			fmt.Printf("Discovered '%s' at grpc://%s:%d...\n", game.Name, game.Host, game.Port)
-		}
-	}(games)
+	for game := range games {
+		fmt.Printf("Discovered '%s' at grpc://%s:%d...\n", game.Name, game.Host, game.Port)
+	}
 
 	<-ctx.Done()
 }
