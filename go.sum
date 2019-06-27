@@ -13,6 +13,8 @@ github.com/cenkalti/backoff v2.1.1+incompatible h1:tKJnvO2kl0zmb/jA5UKAt4VoEVw1q
 github.com/cenkalti/backoff v2.1.1+incompatible/go.mod h1:90ReRw6GdpyfrHakVjL/QHaoyV4aDUVVkXQJJJ3NXXM=
 github.com/cespare/xxhash v1.1.0/go.mod h1:XrSqR1VqqWfGrhpAt58auRo0WTKS1nRRg3ghfAqPWnc=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
+github.com/conreality/conreality-gdk v0.0.0-20190627115929-2b27c545e85e h1:aAhixtbeV7AWlZdEdXLLXSDNf0aPvMiKFswVbpgVq3s=
+github.com/conreality/conreality-gdk v0.0.0-20190627115929-2b27c545e85e/go.mod h1:NZAJShEz5fn/SUviR5zUWgn7DGGBcpkF/GpGSj5FRU8=
 github.com/conreality/conreality.go v0.0.0-20190624203311-8adf1ad91d5b h1:8B8Gwur3uaUrD3Z5dD5AMLLiY2sXY/N8Vcb7v/y9X2M=
 github.com/conreality/conreality.go v0.0.0-20190624203311-8adf1ad91d5b/go.mod h1:G+8vogaXIvUloYdaj4M3lWXhdbD6Q6yh16IJv44/h1o=
 github.com/coreos/bbolt v1.3.2/go.mod h1:iRUV2dpdMOn7Bo10OQBFzIJO9kkE559Wcmn+qkEiiKk=

@@ -7,7 +7,7 @@ import (
 
 	"github.com/Azure/golua/lua"
 	"github.com/Azure/golua/std"
-	"github.com/conreality/conreality-cli/consim/model"
+	"github.com/conreality/conreality-gdk/gdk"
 )
 
 // Simulator
@@ -41,14 +41,14 @@ func NewSimulator() *Simulator {
 		sim.vm.Pop()
 	}
 
-	self := model.Self{}
+	self := gdk.Agent{}
 	sim.vm.Push(&self)                   // []          => [self] <-TOS
 	sim.vm.PushIndex(-1)                 // [self]      => [self self]
 	sim.vm.SetGlobal("self")             // [self self] => [self]
-	sim.vm.NewMetaTable("Self")          // [self] => [self mt]
+	sim.vm.NewMetaTable("Agent")          // [self] => [self mt]
 	sim.vm.PushIndex(-1)                 // [self mt] => [self mt mt]
 	sim.vm.SetField(-2, "__index")       // [self mt mt] => [self mt] // metatable.__index = metatable
-	sim.vm.SetFuncs(gdkSelfMethods(), 0) //
+	sim.vm.SetFuncs(gdkAgentMethods(), 0) //
 	sim.vm.SetMetaTableAt(-2)            // [self mt] => [self]
 	sim.vm.Pop()                         // [self] => []
 

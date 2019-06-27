@@ -4,7 +4,7 @@ package gdkvm
 
 import (
 	"github.com/Azure/golua/lua"
-	"github.com/conreality/conreality-cli/consim/model"
+	"github.com/conreality/conreality-gdk/gdk"
 )
 
 func gdkLibraryOpen(vm *lua.State) int {
@@ -23,17 +23,17 @@ func gdkLibraryFunctions() map[string]lua.Func {
 	}
 }
 
-func gdkSelfMethods() map[string]lua.Func {
+func gdkAgentMethods() map[string]lua.Func {
 	result := make(map[string]lua.Func)
-	for k, v := range model.SelfPredicates() {
-		result[k] = wrapSelfPredicate(v)
+	for k, v := range gdk.AgentPredicates() {
+		result[k] = wrapAgentPredicate(v)
 	}
 	return result
 }
 
-func wrapSelfPredicate(f model.SelfPredicate) lua.Func {
+func wrapAgentPredicate(f gdk.AgentPredicate) lua.Func {
 	return func(vm *lua.State) int {
-		self := vm.CheckUserData(1, "Self").(*model.Self)
+		self := vm.CheckUserData(1, "Agent").(*gdk.Agent)
 		vm.Push(f(self))
 		return 1 // [] => [result]
 	}
