@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/conreality/conreality.go/sdk"
 	"github.com/conreality/conreality-gdk/rt"
+	"github.com/conreality/conreality.go/sdk"
 	"github.com/spf13/cobra"
 )
 
@@ -22,7 +22,18 @@ var RootCmd = &cobra.Command{
 	Version: sdk.Version,
 	Args:    cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		thread := rt.NewThread()
+		model := &rt.Model{
+			Self:    &Agent{},
+			Unit:    &Unit{},
+			Theater: &Theater{},
+			Game:    &Game{},
+		}
+		thread, err := rt.NewThread(model)
+		if err != nil {
+			panic(err)
+		}
+		defer thread.Destroy()
+
 		for _, scriptPath := range args {
 			if verbose || debug {
 				fmt.Printf("Executing %s...\n", scriptPath)
@@ -31,7 +42,10 @@ var RootCmd = &cobra.Command{
 				panic(err)
 			}
 		}
-		thread.DumpStack()
+
+		if debug {
+			thread.DumpStack()
+		}
 	},
 }
 
