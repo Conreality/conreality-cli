@@ -7,17 +7,6 @@ import (
 	"github.com/conreality/conreality-cli/consim/model"
 )
 
-// selfPredicate
-type selfPredicate func(*model.Self) bool
-
-func wrapSelfPredicate(f selfPredicate) lua.Func {
-	return func(vm *lua.State) int {
-		self := vm.CheckUserData(1, "Self").(*model.Self)
-		vm.Push(f(self))
-		return 1 // [] => [result]
-	}
-}
-
 func gdkLibraryOpen(vm *lua.State) int {
 	funcs := gdkLibraryFunctions()
 	vm.NewTableSize(0, len(funcs))
@@ -35,8 +24,17 @@ func gdkLibraryFunctions() map[string]lua.Func {
 }
 
 func gdkSelfMethods() map[string]lua.Func {
-	return map[string]lua.Func{
-		"is_player": wrapSelfPredicate((*model.Self).IsPlayer),
-		"is_robot":  wrapSelfPredicate((*model.Self).IsRobot),
+	result := make(map[string]lua.Func)
+	for k, v := range model.SelfPredicates() {
+		result[k] = wrapSelfPredicate(v)
+	}
+	return result
+}
+
+func wrapSelfPredicate(f model.SelfPredicate) lua.Func {
+	return func(vm *lua.State) int {
+		self := vm.CheckUserData(1, "Self").(*model.Self)
+		vm.Push(f(self))
+		return 1 // [] => [result]
 	}
 }

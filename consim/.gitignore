@@ -1,2 +1,5 @@
 # Executable binary
 consim
+
+# Test scripts
+test.lua

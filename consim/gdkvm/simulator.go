@@ -41,7 +41,7 @@ func NewSimulator() *Simulator {
 		sim.vm.Pop()
 	}
 
-	self := model.Self{A: 42}
+	self := model.Self{}
 	sim.vm.Push(&self)                   // []          => [self] <-TOS
 	sim.vm.PushIndex(-1)                 // [self]      => [self self]
 	sim.vm.SetGlobal("self")             // [self self] => [self]
