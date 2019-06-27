@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/conreality/conreality.go/sdk"
-	"github.com/conreality/conreality-cli/consim/gdkvm"
+	"github.com/conreality/conreality-gdk/rt"
 	"github.com/spf13/cobra"
 )
 
@@ -22,16 +22,16 @@ var RootCmd = &cobra.Command{
 	Version: sdk.Version,
 	Args:    cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		sim := gdkvm.NewSimulator()
+		thread := rt.NewThread()
 		for _, scriptPath := range args {
 			if verbose || debug {
 				fmt.Printf("Executing %s...\n", scriptPath)
 			}
-			if err := sim.EvalFile(scriptPath); err != nil {
+			if err := thread.EvalFile(scriptPath); err != nil {
 				panic(err)
 			}
 		}
-		sim.Dump()
+		thread.DumpStack()
 	},
 }
 
