@@ -27,8 +27,9 @@ var RootCmd = &cobra.Command{
 			Unit:    &Unit{},
 			Theater: &Theater{},
 			Game:    &Game{},
+			Headset: &Headset{},
 		}
-		thread, err := rt.NewThread(model)
+		thread, err := rt.NewThread(model, true)
 		if err != nil {
 			panic(err)
 		}

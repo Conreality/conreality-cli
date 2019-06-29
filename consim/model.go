@@ -2,6 +2,16 @@
 
 package main
 
+import "fmt"
+
+// Headset
+type Headset struct{}
+
+// Speak
+func (headset *Headset) Speak(message string) {
+	fmt.Printf(">>> %s\n", message)
+}
+
 // Agent
 type Agent struct{}
 
