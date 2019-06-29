@@ -39,8 +39,36 @@ var RootCmd = &cobra.Command{
 			if verbose || debug {
 				fmt.Printf("Executing %s...\n", scriptPath)
 			}
+
 			if err := thread.EvalFile(scriptPath); err != nil {
 				panic(err)
+			}
+
+			if debug {
+				fmt.Printf("Invoking the %s hook...\n", "on_load")
+			}
+			if thread.HasFunction("on_load") {
+				if err := thread.CallFunction("on_load"); err != nil {
+					panic(err)
+				}
+			}
+
+			if debug {
+				fmt.Printf("Invoking the %s hook...\n", "on_activity")
+			}
+			if thread.HasFunction("on_activity") {
+				if err := thread.CallFunction("on_activity", map[string]string{"activity": "running"}); err != nil { // FIXME
+					panic(err)
+				}
+			}
+
+			if debug {
+				fmt.Printf("Invoking the %s hook...\n", "on_unload")
+			}
+			if thread.HasFunction("on_unload") {
+				if err := thread.CallFunction("on_unload"); err != nil {
+					panic(err)
+				}
 			}
 		}
 
